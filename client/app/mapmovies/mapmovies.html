@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form" name="myFormMovie" ng-submit="mapmoviesCtrl.Addmapmovie()">
+       <h3>Movie Maping</h3><br>
+      <h5>MoviesName</h5>
+       <div class="form-group">
+         <select class="form-control" ng-model="mapmoviesCtrl.title" ng-change="mapmoviesCtrl.getmovie()" required>
+           <option ng-repeat="z in mapmoviesCtrl.data" >{{z.title}}</option>
+      </select>
+  </div>
+       <h5>Location</h5>
+        <div class="form-group">
+           <select class="form-control" id="editlocation" ng-model="mapmoviesCtrl.location" >
+             <option ng-if="mapmoviesCtrl.title" ng-repeat="y in mapmoviesCtrl.tdata|unique:'location'" >{{y.location}}</option>
+           </select>
+        </div>
+
+        <h5>TheatreName</h5>
+      <div class="form-group">
+          <select  class="form-control"  ng-model="mapmoviesCtrl.tname" ng-change="mapmoviesCtrl.getshowtime()">
+          <option ng-if="mapmoviesCtrl.location" ng-repeat="x in mapmoviesCtrl.tdata|filter:mapmoviesCtrl.location" >{{x.theatrename}}</option>
+     </select>
+   </div>
+
+      <h5>Showtime</h5>
+      <div class="form-group">
+        <select id="UserSelector" class="form-control" >
+          <!-- <option ng-repeat="w in mapmoviesCtrl.tdata|filter:mapmoviesCtrl.location">{{w.showtime}}</option> -->
+          <optgroup label="Select" ng-repeat="tobj in mapmoviesCtrl.st" >
+            <option ng-if="mapmoviesCtrl.tname" ng-repeat="tm in tobj"  >{{tm}}</option></optgroup>
+     </select>
+
+    <tr><td><button  type="button" ng-click="mapmoviesCtrl.Add()" class="btn btn-success">Add showtime</button>
+    <select id="mySelect" multiple></select><td></tr>
+      </div>
+
+
+      <select id="selecteddata" class="form-control" ng-model="mapmoviesCtrl.formdate">
+
+          <option  ng-repeat="t in mapmoviesCtrl.mapDates"  >{{t}}</option></optgroup>
+      </select>
+
+      <button  type="button" ng-click="mapmoviesCtrl.Adddate()" class="btn btn-success">Add Available Date</button>
+      <select id="mydate" multiple></select>
+
+      <div style=" margin-left: 40%";><th><button type="submit" ng-disabled="myFormMovie.$invalid" class="btn btn-primary btn-lg" ng-click="">Map</button></th></div>.<br>
+      <!-- <button type="button" ng-click="mapmoviesCtrl.update()" class="btn btn-primary">Update</button> -->
+    </form>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <table class="table">
+        <p style="font-size:36px;color:#06716d;">Mapmovie List:</p>
+      <tr>
+        <td><h4>poster</h4></td>
+        <td><h4>Moviesname</h4></td>
+          <td><h4>Location</h4></td>
+        <td><h4>Theatrename</h4></td>
+        <td><h4>showtime</h4></td>
+         <td><h4>Date</h4></td>
+
+      </tr>
+      <tr ng-repeat="map in mapmoviesCtrl.mapmovieDate">
+         <td rowspan="1">
+        <img src={{map.poster}} width="100px" height="100px"  /></td>
+        <td>{{map.title}}</td>
+        <td>{{map.location}}</td>
+        <td>{{map.tname}}</td>
+        <td>{{map.showtime}}</td>
+        <td>{{map.formdate}}</td>
+        <!-- <td>{{mapmovie.todate}}</td> -->
+        <td>
+          <button class="btn btn-danger" ng-click="mapmoviesCtrl.Remove(map)">Remove</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

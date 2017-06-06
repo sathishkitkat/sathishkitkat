@@ -1,0 +1,57 @@
+.seaton{
+  width: 30px;
+  height:30px;
+  /*background-color: lightblue;*/
+  border-radius: 30%;
+  text-align: center;
+  border: 1px solid black;
+
+}
+/*table {
+    border: 1px solid black;
+    padding: 0.5em;
+}*/
+
+/*td {
+    padding: 1em;
+    border: 1px solid gray;
+}*/
+
+td:hover {
+    cursor: default;
+    /*background-color: #fff;*/
+    border-top: 1px solid #fff;
+
+}
+
+/*.active {
+    border: 2px solid lightgreen;
+    border-radius: px;
+}*/
+
+.booked {
+    background-color: lightgray;
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #2196f3;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+/*.button:hover {background-color: #3e8e41}*/
+
+.button:active {
+  background-color: #2196f3;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}

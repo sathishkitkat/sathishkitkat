@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+  <div class="col-md-9">
+  <form class="form" name="myFormMovie" ng-submit="paymentCtrl.Addpayment()">
+    <div style="margin-left:40%">
+  <h2>Payment</h2>
+  <table class="table table-striped">
+    <thead>
+    <tbody>
+      <tr>
+         <tr><th>Username :</th><td><input ng-model="paymentCtrl.uname" type="text" placeholder="Username" class="form-control" required/></td></tr>
+         <tr><th>Contact :</th><td><input ng-model="paymentCtrl.contact" type="text" placeholder="ContactNo"  minlength="10" maxlength="10" class="form-control" required/></td></tr>
+          <tr><th>EmailId :</th><td><input ng-model="paymentCtrl.mailid" type="Email" placeholder="Email Id" class="form-control" required/></td></tr>
+           <tr><th>MovieName :</th><td id="mname"></td></tr>
+          <tr> <th>Theatre :</th><td id="tr1"></td ></tr>
+           <tr><th>Date :</th><td id="tdate"></td ></tr>
+           <tr><th>Time :</th><td id="time"></td></tr>
+           <tr><th>CityName :</th><td id="cnam"></td ></tr>
+           <tr><th>Amount :</th><td id="amount"></td ></tr>
+             <tr><th>SeatNo :</th><td id="sno"></td ></tr>
+             <tr><th>Card No :</th><td id="cdno"><input ng-model="paymentCtrl.cdno" type="text" placeholder="Card No" class="form-control"  minlength="16" maxlength="16" required/></td ></tr>
+             <tr><th>Cvv No :</th><td id="cvno"><input ng-model="paymentCtrl.cvno" type="text" placeholder="Cvv/ No" class="form-control" minlength="3" maxlength="3" required/></td ></tr><br>
+
+              <!-- <th>
+                <form name="myForm" action="/" onsubmit="paymentCtrl.return validateForm();" method="post">
+                Email: <input type="text"  class="form-control" name="email">
+                <input type="submit"  value="Submit">
+                </form>
+              </th> -->
+<th>
+<div style= "margin-left: 50%";><button  type="submit" ng-disabled="myFormMovie.$invalid" class="btn btn-primary btn-lg" ng-click="paymentCtrl.Addpayment()">Confirm</button></div></th><br>
+</tr>
+</tbody>
+</thead>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>

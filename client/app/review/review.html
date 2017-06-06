@@ -1,0 +1,85 @@
+<style>
+.rating {
+    overflow: hidden;
+    display: inline-block;
+    font-size: 0;
+    position: relative;
+}
+.rating-input {
+    float: right;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin: 0 0 0 -16px;
+    opacity: 0;
+}
+.rating:hover .rating-star:hover,
+.rating:hover .rating-star:hover ~ .rating-star,
+.rating-input:checked ~ .rating-star {
+    background-position: 0 0;
+}
+.rating-star,
+.rating:hover .rating-star {
+    position: relative;
+    float: right;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
+}
+</style>
+<div class="container">
+<h2>Rewiew</h2>
+  <div class="row">
+    <div class="col-md-12">
+
+  <div  class="col-xs-6 col-sm-3 col-md-3" ng-repeat="m in reviewCtrl.moviesData">
+    <div class="panel panel-primary" >
+    <div class="panel-heading">{{m.title}}</div>
+    <div class="panel-body"><img src={{m.poster}} style="width:200px; height:200px;" alt="img" >{{m.Avg}}%<span class="glyphicon glyphicon-heart" style="color: #428bca;"></div>
+
+    <div class="panel-footer"><button type="button" ng-click="reviewCtrl.review(m)" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Review</button></div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h3 class="modal-title">Movie Rating</h3>
+          </div>
+          <div class="modal-body">
+            <form class="form" name="myFormMovie" ng-submit="reviewCtrl.review()">
+            <table class="table table-striped">
+          <tbody>
+          <tr><th> Movie:</th></th><td id="mname" ></td></tr>
+            <tr><th>Name:</th> <th><input type="text" class="form-control" ng-model="reviewCtrl.username" required></th></td></tr>
+              <tr><th>Comment:</th> <th><textarea type="text" class="form-control" cols="50" ng-model="reviewCtrl.comment" required></textarea></th></td></tr>
+                <tr class="tablestyle"> <th>Rating</th><td ng-module="rating"><span class="rating">
+<input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1" value="5" ng-model="reviewCtrl.rating"/>
+<label for="rating-input-1-1" class="rating-star"></label>
+<input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1" value="4" ng-model="reviewCtrl.rating"/>
+<label for="rating-input-1-2" class="rating-star"></label>
+<input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1" value="3" ng-model="reviewCtrl.rating"/>
+<label for="rating-input-1-3" class="rating-star"></label>
+<input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1" value="2" ng-model="reviewCtrl.rating" />
+<label  for="rating-input-1-4" class="rating-star"></label>
+<input type="radio" class="rating-input" id="rating-input-1-5"  name="rating-input-1" value="1" ng-model="reviewCtrl.rating" />
+<label for="rating-input-1-5" class="rating-star"></label>
+</span></td>
+</tr>
+  </tbody>
+</table>
+</form>
+  </div>
+  <div class="modal-footer">
+    <div style="margin-right: 80%"><button  type="submit" ng-disabled="myFormMovie.$invalid" class="btn btn-primary" ng-click="reviewCtrl.Addrating()" >Rate</button></div>
+    <div style="margin-top: -5%"><button  type="submit" ng-disabled="myFormMovie.$invalid" class="btn btn-danger"  data-dismiss="modal" ng-click="reviewCtrl.postavg()" >Confirm</button></div>
+  </div>
+    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+  </div>
+</div>

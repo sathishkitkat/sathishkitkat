@@ -1,0 +1,91 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Add Movies</h3>
+      <div class="tab-content">
+         <div id="home" class="tab-pane fade in active">
+           <form class="form" name="myFormMovie" ng-submit="$moviesCtrl.getmovie()">
+      <div class="form-group">
+        <input type="text" placeholder="name" class="form-control" ng-model="$moviesCtrl.name" required/ >
+      </div>
+     <div class="form-group">
+       <!-- <input type="text" placeholder="year" class="form-control" ng-model="$moviesCtrl.year" /><br> -->
+      <button type="submit" ng-disabled="myFormMovie.$invalid" ng-click="get" class="btn btn-primary">Get</button>
+   </div>
+</form>
+       <!-- <button class="btn btn-success" ng-click="$moviesCtrl.Addmovies()">Add</button> -->
+    </div>
+  </div>
+</div>
+</div>
+
+  <div class="row" >
+    <div class="col-md-12 text-center" >
+      <!-- <div ng-show="$moviesCtrl.movieObj.Response=='False'">
+        <div class="alert alert-danger">
+          <p>There is no movie for this name<p>
+    </div>
+  </div> -->
+    <table ng-if="$moviesCtrl.get" class="table table-default" >
+      <thead>
+        <tr>
+          <th>poster_path</th>
+          <th>title</th>
+          <!-- <th>Year</th> -->
+          <!-- <th>original_language</th> -->
+          <th>overview</th>
+          <!-- <th>Actors</th> -->
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="text-align:left">
+          <td rowspan="2">
+            <img src={{$moviesCtrl.movieObj.poster_path}} width="90%" height="50%"  />
+            <!-- <img src="assets/images/noposter.jpg" width="150" height="200" ng-show="$moviesCtrl.omdbdata.Poster=='N/A'" /> -->
+          </td>
+          <td>{{$moviesCtrl.movieObj.title}}</td>
+          <!-- <td>{{$moviesCtrl.movieObj.Year}}</td> -->
+          <!-- <td>{{$moviesCtrl.movieObj.original_language}}</td> -->
+          <td>{{$moviesCtrl.movieObj.overview}}</td>
+          <!-- <td>{{$moviesCtrl.movieObj.Actors}}</td> -->
+
+        </tr>
+        <tr>
+          <td><button ng-if="$moviesCtrl.get" type="button" class="btn btn-primary btn-lg" ng-click="$moviesCtrl.Addmovies()"><span class="glyphicon glyphicon-plus"></span> Add Movie</button></td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+ <div class="row">
+  <div class="col-md-12">
+    <table class="table table-default table-hover">
+    <h3><font face="verdana" color="green">Movies List :</font></h3>
+      <thead>
+      <tr>
+        <th>poster</th>
+        <th>title</th>
+        <!-- <th>Language</th> -->
+        <th>overview</th>
+
+      </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="movie in $moviesCtrl.moviesData">
+      <td rowspan="1">
+      <img src={{movie.poster}} width="200px" height="200px" /> </td>
+      <td>{{movie.title}}</td>
+      <td>{{movie.overview}}</td>
+
+      <td><button type="submit" class="btn btn-danger glyphicon glyphicon-trash" ng-click="$moviesCtrl.Delete(movie)"></button></td>
+
+    </tr>
+  </tbody>
+  </table>
+  </div>
+  </div>
+</div>

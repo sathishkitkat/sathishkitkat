@@ -1,0 +1,9 @@
+
+
+.hero-image {
+  background-image:("http://www.hdwallpapers.in/walls/avengers_age_of_ultron_team-HD.jpg");
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;

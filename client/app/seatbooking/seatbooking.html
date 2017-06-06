@@ -1,0 +1,513 @@
+<script>
+
+var count=0;
+var sn="";
+var seats=[];
+var subtotal=0;
+
+$(document).ready(function(){
+
+ $("img").click(function(){
+   var id = $(this).attr('id');
+   var path = $('#'+id).attr('src');
+       var x=path.substring(path.lastIndexOf('chair-2-512 (4)'),path.length);
+       var y=path.substring(path.lastIndexOf('chair-2-512'),path.length);
+       var selseats=document.getElementById("seatss").value;
+       console.log(document.getElementById("seatss").value);
+       console.log(selseats);
+       if(x=="chair-2-512 (4).gif")
+       {
+         if(count<selseats){
+       $('#'+id).attr('src','assets/Images/chair-2-512.gif');
+       count++;
+       seats.push(id);
+       console.log(seats);
+       }
+       else
+         {
+alert('You have already selected '+ selseats +' seat(s)');
+         }
+}
+       else if(y=="chair-2-512.gif")
+       {
+       $('#'+id).attr('src','assets/Images/chair-2-512 (4).gif');
+       if(!count==0){
+       count--;
+       }
+     }
+
+       subtotal=count*100;
+       document.getElementById("seatno").innerHTML=seats;
+       document.getElementById("subtotal").innerHTML=subtotal;
+       document.getElementById("seatcount").innerHTML=count;
+ });
+});
+function clearSelection(){
+       for(i=0;i<seats.length;i++){
+         $('#'+seats[i]).attr('src','assets/Images/chair-2-512 (4).gif');
+       }
+       count=0;
+       subtotal=0;
+       seats=[];
+
+       document.getElementById("seatno").innerHTML=seats;
+       document.getElementById("subtotal").innerHTML=subtotal;
+       document.getElementById("seatcount").innerHTML=count;
+
+     }
+     $("#clearbtn").click(clearSelection);
+ </script>
+
+<div class="container" style="overflow:hidden;">
+  <div class="row">
+    <div class="col-md-8">
+      <form class="form" name="myFormMovie" ng-submit="mapmoviesCtrl.Addmapmovie()">
+         <table class="table">
+  <tbody>
+
+  <div>
+  <button  id="mname" type="button" class="btn btn-primary btn-lg btn-block "></button>
+</div>
+ <tr> <th>Movie Name</th><td id="mtit"></td></tr>
+
+<tr>  <th>L.ocation</th>
+<td><select  class="form-control" ng-model="seatbookingCtrl.city" required>
+ <option  ng-repeat="t in seatbookingCtrl.minfo|unique:'location'" value="{{t.location}}" >{{t.location}}</option>
+</select></td></tr>
+
+<tr class="tablestyle"><th>Theatre Name</th><td>
+<select class="form-control" ng-model="seatbookingCtrl.Theatre" required>
+<option ng-if="seatbookingCtrl.city" ng-repeat="tobj in seatbookingCtrl.minfo|filter:seatbookingCtrl.city|unique:'tname'" value="{{tobj.tname}}">{{tobj.tname}}
+    </option></select> </td></tr>
+<tr><th>
+ select a Date:</th> <td><select class="form-control" ng-model="seatbookingCtrl.date" required><optgroup ng-repeat="dt in seatbookingCtrl.minfo|filter:seatbookingCtrl.city|filter:seatbookingCtrl.Theatre">
+         <option ng-if="seatbookingCtrl.Theatre" ng-repeat="d in dt.formdate" value="{{d}}">{{d}}</option></optgroup></select>
+
+ </td></tr>
+ <tr><th>Showtime</th>
+ <td>
+ <select class="form-control" ng-model='seatbookingCtrl.showtime' ng-change="seatbookingCtrl.bkeddata()" required><optgroup ng-repeat="o in seatbookingCtrl.minfo|filter:seatbookingCtrl.city|filter:seatbookingCtrl.Theatre|filter:seatbookingCtrl.date|unique:'showtime'">
+         <option ng-if="seatbookingCtrl.date" ng-repeat="m in o.showtime" value="{{m}}">{{m}}</option></optgroup></select></td></tr>
+
+<tr>    <th>No of Tickets</th>
+          <td>  <select class="form-control" id="seatss" ng-model="seatbookingCtrl.numberofseat">Tickets
+            <option value="1">1</option>
+                <option value="2">2</option>
+                <option  value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select></td>
+          </tr>
+        </tbody>
+        </table>
+<tr>
+  <h3 ng-if="seatbookingCtrl.showtime">Select Your Seats:</h3>
+  <td>
+
+  <div ng-if="seatbookingCtrl.showtime" style= "margin-top: 10%; margin-bottom: -7%;"> <img src="assets/images/chair-2-512 (4).gif" style= "width:55px; height:55px;">  Available</div>
+  <div  ng-if="seatbookingCtrl.showtime" style= "margin-left: 18%;"> <img src="assets/images/chair-2-512.gif" style= "width:55px; height:55px;"> selected</div>
+ <div  ng-if="seatbookingCtrl.showtime" style="margin-top: -7%; margin-left: 35%;"> <img src="assets/images/chair-2-512 (3).gif" style= "width:55px; height:55px;" >Booked</div>
+<div  ng-if="seatbookingCtrl.showtime" style="margin-left: 60%; margin-top: -6%;"> <button id="clearbtn" class="btn btn-danger">Clear Selection</button></div><br/>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+    <div class="col-md-8">
+      <div  >
+      <table align="center" class="table table-default" id="table1">
+        <tr>
+          <td>No</td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+          <td>10</td>
+        </tr>
+      </td>
+
+  <td>A</td>
+          <td>
+          <img alt="" id="A1" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+
+          <td>
+          <img alt="" id="A2" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+          </td>
+          <td>
+          <img alt="" id="A3" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+          </td>
+          <td>
+          <img alt="" id="A4" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+          </td>
+          <td>
+          <img alt="" id="A5" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+          </td>
+          <td>
+          <img alt="" id="A6" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+          </td>
+          <td>
+          <img alt="" id="A7" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+          </td>
+          <td>
+          <img alt="" id="A8" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+          </td>
+          <td>
+          <img alt="" id="A9" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+          </td>
+          <td>
+          <img alt="" id="A10" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+          </td>
+        </tr>
+
+        <td>B</td>
+        <td>
+        <img alt="" id="B1" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+        </td>
+
+        <td>
+        <img alt="" id="B2" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+        </td>
+        <td>
+        <img alt="" id="B3" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+        </td>
+        <td>
+        <img alt="" id="B4" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+        </td>
+        <td>
+        <img alt="" id="B5" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+        </td>
+        <td>
+        <img alt="" id="B6" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+        </td>
+        <td>
+        <img alt="" id="B7" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+        </td>
+        <td>
+        <img alt="" id="B8" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+        </td>
+        <td>
+        <img alt="" id="B9" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+        </td>
+        <td>
+        <img alt="" id="B10" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+        </td>
+      </tr>
+
+      <td>C</td>
+      <td>
+      <img alt="" id="C1" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+      </td>
+
+      <td>
+      <img alt="" id="C2" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+      </td>
+      <td>
+      <img alt="" id="C3" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+      </td>
+      <td>
+      <img alt="" id="C4" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+      </td>
+      <td>
+      <img alt="" id="C5" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+      </td>
+      <td>
+      <img alt="" id="C6" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+      </td>
+      <td>
+      <img alt="" id="C7" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+      </td>
+      <td>
+      <img alt="" id="C8" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+      </td>
+      <td>
+      <img alt="" id="C9" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+      </td>
+      <td>
+      <img alt="" id="C10" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+      </td>
+    </tr>
+
+    <td>D</td>
+    <td>
+    <img alt="" id="D1" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+    </td>
+
+    <td>
+    <img alt="" id="D2" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+    </td>
+    <td>
+    <img alt="" id="D3" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+    </td>
+    <td>
+    <img alt="" id="D4" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+    </td>
+    <td>
+    <img alt="" id="D5" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+    </td>
+    <td>
+    <img alt="" id="D6" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+    </td>
+    <td>
+    <img alt="" id="D7" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+    </td>
+    <td>
+    <img alt="" id="D8" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+    </td>
+    <td>
+    <img alt="" id="D9" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+    </td>
+    <td>
+    <img alt="" id="D10" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+    </td>
+  </tr>
+
+  <td>E</td>
+  <td>
+  <img alt="" id="E1" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+  </td>
+
+  <td>
+  <img alt="" id="E2" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+  </td>
+  <td>
+  <img alt="" id="E3" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+  </td>
+  <td>
+  <img alt="" id="E4" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+  </td>
+  <td>
+  <img alt="" id="E5" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+  </td>
+  <td>
+  <img alt="" id="E6" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+  </td>
+  <td>
+  <img alt="" id="E7" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+  </td>
+  <td>
+  <img alt="" id="E8" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+  </td>
+  <td>
+  <img alt="" id="E9" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+  </td>
+  <td>
+  <img alt="" id="E10" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+  </td>
+</tr>
+
+<td>F</td>
+<td>
+<img alt="" id="F1" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+
+<td>
+<img alt="" id="F2" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="F3" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="F4" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="F5" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="F6" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="F7" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="F8" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="F9" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="F10" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+</tr>
+
+<td>G</td>
+<td>
+<img alt="" id="G1" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+
+<td>
+<img alt="" id="G2" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="G3" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="G4" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="G5" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="G6" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="G7" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="G8" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="G9" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="G10" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+</tr>
+
+<td>H</td>
+<td>
+<img alt="" id="H1" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+
+<td>
+<img alt="" id="H2" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="H3" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="H4" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="H5" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="H6" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="H7" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="H8" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="H9" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="H10" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+</tr>
+
+<td>I</td>
+<td>
+<img alt="" id="I1" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+
+<td>
+<img alt="" id="I2" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="I3" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="I4" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="I5" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="I6" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="I7" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="I8" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="I9" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="I10" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+</tr>
+
+<td>J</td>
+<td>
+<img alt="" id="J1" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+
+<td>
+<img alt="" id="J2" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="J3" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="J4" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="J5" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="J6" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="J7" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="J8" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="J9" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+<td>
+<img alt="" id="J10" src="assets/Images/chair-2-512 (4).gif" style="width: 25PX; height: 25PX" /></td>
+</td>
+</tr>
+  <button ng-if="seatbookingCtrl.showtime" type="button" class="btn btn-primary btn-lg btn-block">screen</button><br>
+</table>
+</div>
+</div>
+<div class="col-md-4">
+  <div  class="jumbotron well">
+    <table  ng-if="seatbookingCtrl.showtime" align="center" class="table table-default">
+          <thead>
+          <tr>
+      <td colspan="2"><h2>Order Summary</h2></td>
+          </tr>
+        </thead>
+          <tr>
+            <td><span>selected Your seat : </span></td>
+            <td><span id="seatcount">0</span></td>
+          </tr>
+
+          <tr>
+            <td>Seat No : </td>
+            <td><span id="seatno"></span></td>
+          </tr>
+          <tr>
+            <td> Total Amount ₹: </td>
+            <td><span id="subtotal">0</span></td>
+          </tr>
+        </table>
+       </div>
+     </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </div>
+  </div>
+ </div>
+   <div ng-if="seatbookingCtrl.showtime" style=" margin-left: 50%";><button  type="submit" ng-disabled="myFormMovie.$invalid"  class="button btn-lg" ng-click="seatbookingCtrl.pay()">Book</button></tr></td></div>
